@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0f1d33"/>
+      <stop offset="100%" stop-color="#050b18"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="200" fill="url(#bg)"/>
+  <circle cx="200" cy="160" r="60" fill="url(#accent)" opacity="0.85"/>
+  <path d="M 90 380 Q 90 280 200 280 Q 310 280 310 380 Z" fill="url(#accent)" opacity="0.85"/>
+  <text x="200" y="210" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="80" font-weight="700" fill="#050b18">LK</text>
+</svg>

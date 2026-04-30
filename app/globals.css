@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme */
+    --bg: 245 249 252;
+    --surface: 255 255 255;
+    --surface-2: 248 250 252;
+    --border: 226 232 240;
+    --text: 10 22 40;
+    --muted: 71 85 105;
+    --accent: 14 165 233;
+    --accent-strong: 2 132 199;
+  }
+
+  .dark {
+    /* Dark theme */
+    --bg: 5 11 24;
+    --surface: 10 22 40;
+    --surface-2: 15 29 51;
+    --border: 30 50 80;
+    --text: 226 232 240;
+    --muted: 148 163 184;
+    --accent: 94 234 212;
+    --accent-strong: 45 212 191;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-text;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-bg;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted/50;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .glow {
+    box-shadow: 0 0 60px -10px rgb(var(--accent) / 0.4);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent to-accent-strong bg-clip-text text-transparent;
+  }
+
+  .project-card-bg {
+    background-image:
+      radial-gradient(circle at 20% 50%, rgb(var(--accent) / 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgb(var(--accent-strong) / 0.2) 0%, transparent 50%);
+  }
+}
