@@ -15,7 +15,7 @@ export function Services() {
           subtitle="End-to-end development services tailored to your needs."
         />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
             <ServiceCard key={service.title} service={service} index={i} />
           ))}

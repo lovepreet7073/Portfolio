@@ -7,7 +7,7 @@ import { profile } from "@/lib/data";
 export function Hero() {
   return (
     <section id="home" className="relative overflow-hidden py-20 lg:py-28">
-      <div className="container-x grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+      <div className="container-x grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
         {/* Left */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}

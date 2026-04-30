@@ -29,7 +29,7 @@ export function About() {
       <div className="container-x">
         <SectionHeader eyebrow="About" title="A little about me" />
 
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

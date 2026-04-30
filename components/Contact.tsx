@@ -84,7 +84,7 @@ export function Contact() {
           subtitle="Have a project in mind or want to collaborate? I'd love to hear from you — let's build something great together."
         />
 
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
           {/* Form */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
