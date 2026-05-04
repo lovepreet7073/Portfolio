@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ProjectsExplorer } from "@/components/ProjectsExplorer";
 import { Navbar } from "@/components/Navbar";
 import { MobileNav } from "@/components/MobileNav";
@@ -16,8 +17,22 @@ export default function ProjectsPage() {
   );
 }
 
-export const metadata = {
-  title: "All Projects · Lovepreet Kaur",
+export const metadata: Metadata = {
+  title: "All Projects",
   description:
-    "A complete list of projects I've built — Shopify storefronts, MERN apps, WordPress sites, real-time tools, and more.",
+    "A complete list of projects by Lovepreet Kaur — Shopify storefronts, MERN apps, WordPress sites, real-time tools, and more.",
+  alternates: { canonical: "/projects" },
+  openGraph: {
+    type: "website",
+    url: "/projects",
+    title: "All Projects · Lovepreet Kaur",
+    description:
+      "A complete list of projects by Lovepreet Kaur — Shopify storefronts, MERN apps, WordPress sites, real-time tools, and more.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "All Projects · Lovepreet Kaur",
+    description:
+      "A complete list of projects by Lovepreet Kaur — Shopify storefronts, MERN apps, WordPress sites, real-time tools, and more.",
+  },
 };
