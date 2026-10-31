@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -7,6 +8,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  Expand,
   Github,
   ImageOff,
   Loader,
@@ -14,6 +16,7 @@ import {
 } from "lucide-react";
 import type { Project } from "@/lib/data";
 import { Tag } from "./ui/Tag";
+import { Lightbox } from "./ui/Lightbox";
 
 function Block({
   label,
@@ -33,6 +36,8 @@ function Block({
 }
 
 export function ProjectCaseStudy({ project }: { project: Project }) {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
@@ -206,19 +211,27 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           <Block label={project.group === "design" ? "Key Screens" : "Screenshots"}>
             {project.images.length > 0 ? (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {project.images.map((img) => (
-                  <div
+                {project.images.map((img, i) => (
+                  <button
                     key={img.src}
-                    className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-surface-2"
+                    type="button"
+                    onClick={() => setLightboxIndex(i)}
+                    aria-label={`View full screenshot: ${img.alt}`}
+                    className="group relative aspect-video overflow-hidden rounded-2xl border border-border bg-surface-2 text-left"
                   >
                     <Image
                       src={img.src}
                       alt={img.alt}
                       fill
                       sizes="(min-width: 640px) 50vw, 100vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
-                  </div>
+                    <div className="absolute inset-0 flex items-center justify-center bg-bg/0 opacity-0 transition-all duration-200 group-hover:bg-bg/40 group-hover:opacity-100">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-surface text-text">
+                        <Expand className="h-4 w-4" />
+                      </span>
+                    </div>
+                  </button>
                 ))}
               </div>
             ) : (
@@ -233,6 +246,13 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           </Block>
         </div>
       </div>
+
+      <Lightbox
+        images={project.images}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={setLightboxIndex}
+      />
     </motion.article>
   );
 }

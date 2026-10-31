@@ -12,6 +12,7 @@
 | SectionHeader | `components/ui/SectionHeader.tsx` | one | one | Eyebrow + title + underline + optional subtitle. Starts every section. |
 | Input / Textarea | inline in `components/ContactForm.tsx` | default, error | one | **Planned extraction**: not yet a shared component — duplicated `className` logic between the two text inputs and the textarea. Low priority (3 fields, one file). |
 | Card | — | — | — | **Not shared on purpose.** `ProjectCard` and `ServiceCard` differ enough in content/actions that a shared wrapper would need more props than markup it saves. Revisit only if a third, similar card type appears. |
+| Lightbox | `components/ui/Lightbox.tsx` | one | one | Full-screen `object-contain` image viewer (ESC/backdrop-click to close, prev/next for multiple images). Used by `ProjectCaseStudy`'s "Key Screens"/"Screenshots" grid — thumbnails there are `aspect-video object-cover` and crop, so this is the only way to see a screenshot uncropped. |
 
 ## Page templates
 
@@ -61,6 +62,7 @@ None outstanding — the codebase already used the token system consistently bef
 | 2026-10-31 | Added 3 real Parcelio screenshots from the user (hero, testimonials carousel, how-it-works + mobile booking-flow preview) — `parcelio-1.png`/`-2.png`/`-3.png`. Corrected Parcelio's description/highlights to match what the screenshots actually show (a marketing/landing site with a how-it-works flow), not the generic "shipment dashboard" copy written before any screenshot existed. |
 | 2026-10-31 | Added 4 real Vendra screenshots, curated from 7 the user sent per "use only good screens" — `vendra-1.png`..`-4.png` (hero, destinations grid, trip booking flow, login). Dropped a trip-detail screen (captured at an inconsistent ~480×960 mobile-like viewport that would crop badly in the `aspect-video` image containers) and 2 flight-search/payment screens that duplicated the booking-flow screen's subject matter — kept variety over volume. Updated `highlights` to match what's actually shown. |
 | 2026-10-31 | Added 4 real Slotback screenshots from the user (`slotback-1.png`..`-4.png`: hero/booking search, category browse + staff calendar, multi-step booking flow, marketplace find-a-business) — matched the existing `highlights` well, no copy changes needed. All 7 featured projects now have real screenshots except none remain outstanding. Deleted the orphaned `bluespond-1.png`/`bluespond-2.png` (old "Bluespond"-branded screenshots, unreferenced since the Slotback rename). |
+| 2026-10-31 | Added `components/ui/Lightbox.tsx` — the "Key Screens"/"Screenshots" grid on `ProjectCaseStudy` only ever showed `aspect-video object-cover` crops with no way to see a screenshot uncropped (user reported being unable to open them fully). Thumbnails are now buttons that open a full-screen `object-contain` lightbox (ESC/backdrop-click to close, prev/next arrows + counter when a project has multiple images). |
 
 ## Known gaps
 
