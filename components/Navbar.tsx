@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { profile, navLinks } from "@/lib/data";
 import { Button } from "./ui/Button";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -82,9 +83,12 @@ export function Navbar() {
           })}
         </ul>
 
-        <Button href={hrefFor("#contact")} variant="primary" className="!px-4 !py-2 text-xs sm:!px-6 sm:!py-2.5 sm:text-sm">
-          Hire Me
-        </Button>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle className="h-8 w-8 sm:h-9 sm:w-9" />
+          <Button href={hrefFor("#contact")} variant="primary" className="!px-4 !py-2 text-xs sm:!px-6 sm:!py-2.5 sm:text-sm">
+            Hire Me
+          </Button>
+        </div>
       </nav>
     </header>
   );

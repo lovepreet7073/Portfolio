@@ -5,7 +5,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Lovepreet Kaur — React.js & MERN Developer";
+export const alt = "Lovepreet Kaur — Technical Product Designer & Design Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -21,7 +21,7 @@ export default async function OpengraphImage() {
           justifyContent: "space-between",
           padding: "80px",
           background:
-            "linear-gradient(135deg, #16171A 0%, #1F2025 50%, #202228 100%)",
+            "linear-gradient(135deg, #0B0D12 0%, #151823 50%, #1C2030 100%)",
           color: "#FFFFFF",
           fontFamily: "sans-serif",
           position: "relative",
@@ -32,7 +32,7 @@ export default async function OpengraphImage() {
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(circle at 85% 15%, rgba(63, 134, 114, 0.35) 0%, transparent 45%), radial-gradient(circle at 10% 90%, rgba(79, 169, 138, 0.2) 0%, transparent 45%)",
+              "radial-gradient(circle at 85% 15%, rgba(129, 140, 248, 0.35) 0%, transparent 45%), radial-gradient(circle at 10% 90%, rgba(165, 180, 252, 0.2) 0%, transparent 45%)",
             display: "flex",
           }}
         />
@@ -50,11 +50,11 @@ export default async function OpengraphImage() {
               width: "64px",
               height: "64px",
               borderRadius: "14px",
-              background: "linear-gradient(135deg, #4FA98A, #3F8672)",
+              background: "linear-gradient(135deg, #A5B4FC, #818CF8)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#16171A",
+              color: "#0B0D12",
               fontSize: "30px",
               fontWeight: 800,
               letterSpacing: "-0.02em",
@@ -65,7 +65,7 @@ export default async function OpengraphImage() {
           <div
             style={{
               fontSize: "24px",
-              color: "#9CA3AF",
+              color: "#94A3B8",
               fontFamily: "monospace",
               display: "flex",
             }}
@@ -85,7 +85,7 @@ export default async function OpengraphImage() {
           <div
             style={{
               fontSize: "30px",
-              color: "#4FA98A",
+              color: "#A5B4FC",
               fontFamily: "monospace",
               display: "flex",
             }}
@@ -107,12 +107,12 @@ export default async function OpengraphImage() {
           <div
             style={{
               fontSize: "44px",
-              color: "#4FA98A",
+              color: "#A5B4FC",
               fontFamily: "monospace",
               display: "flex",
             }}
           >
-            React.js &amp; MERN Developer
+            Product Designer · MERN Developer
           </div>
         </div>
 
@@ -129,22 +129,22 @@ export default async function OpengraphImage() {
               display: "flex",
               gap: "20px",
               fontSize: "24px",
-              color: "#9CA3AF",
+              color: "#94A3B8",
               fontFamily: "monospace",
             }}
           >
+            <span>UI/UX</span>
+            <span>·</span>
+            <span>Design Systems</span>
+            <span>·</span>
             <span>MERN</span>
             <span>·</span>
             <span>Shopify</span>
-            <span>·</span>
-            <span>WordPress</span>
-            <span>·</span>
-            <span>Next.js</span>
           </div>
           <div
             style={{
               fontSize: "22px",
-              color: "#7B828C",
+              color: "#64748B",
               fontFamily: "monospace",
               display: "flex",
             }}

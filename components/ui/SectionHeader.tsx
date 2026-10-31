@@ -20,7 +20,7 @@ export function SectionHeader({ eyebrow, title, subtitle }: Props) {
       <p className="mb-3 text-xs font-semibold uppercase tracking-eyebrow text-accent">
         {eyebrow}
       </p>
-      <h2 className="text-4xl font-bold tracking-tight text-text sm:text-5xl">
+      <h2 className="font-serif text-4xl font-semibold tracking-tight text-text sm:text-5xl">
         {title}
       </h2>
       <div className="mt-4 h-1 w-16 rounded-full bg-accent" />

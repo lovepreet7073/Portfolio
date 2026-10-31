@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Onest, JetBrains_Mono } from "next/font/google";
+import { Onest, JetBrains_Mono, Fraunces } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { SmoothHashScroll } from "@/components/SmoothHashScroll";
 import "./globals.css";
 
@@ -15,6 +16,13 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz", "SOFT"],
+});
+
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "https://portfolio-ten-livid-ek61h6djfu.vercel.app";
@@ -22,24 +30,25 @@ const SITE_URL =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Lovepreet Kaur — React.js & MERN Developer",
+    default: "Lovepreet Kaur — Technical Product Designer & Design Engineer",
     template: "%s · Lovepreet Kaur",
   },
   description:
-    "React.js Developer with 2+ years of experience building fast, responsive web apps. Specializing in MERN stack, Shopify, and WordPress.",
+    "Technical Product Designer & Design Engineer with 2+ years of MERN development experience. UI/UX, design systems and AI-assisted product development.",
   applicationName: "Lovepreet Kaur Portfolio",
   keywords: [
     "Lovepreet Kaur",
+    "Technical Product Designer",
+    "Design Engineer",
+    "UI/UX Designer",
+    "Product Designer",
+    "Design Systems",
     "React Developer",
     "MERN Stack Developer",
     "Shopify Developer",
     "WordPress Developer",
     "Frontend Developer",
-    "Full Stack Developer",
     "Next.js Developer",
-    "JavaScript Developer",
-    "Web Developer Punjab",
-    "Web Developer India",
   ],
   authors: [{ name: "Lovepreet Kaur", url: SITE_URL }],
   creator: "Lovepreet Kaur",
@@ -53,15 +62,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Lovepreet Kaur — Portfolio",
-    title: "Lovepreet Kaur — React.js & MERN Developer",
+    title: "Lovepreet Kaur — Technical Product Designer & Design Engineer",
     description:
-      "React.js Developer with 2+ years of experience. MERN · Shopify · WordPress.",
+      "Technical Product Designer & Design Engineer, 2+ years of MERN development. UI/UX · Design Systems · AI-Assisted Development.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lovepreet Kaur — React.js & MERN Developer",
+    title: "Lovepreet Kaur — Technical Product Designer & Design Engineer",
     description:
-      "React.js Developer with 2+ years of experience. MERN · Shopify · WordPress.",
+      "Technical Product Designer & Design Engineer, 2+ years of MERN development. UI/UX · Design Systems · AI-Assisted Development.",
     creator: "@lovepreetkaur",
   },
   robots: {
@@ -85,8 +94,11 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1F2025", // design-ignore: literal meta theme-color, mirrors --surface (see DESIGN.md)
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F8FAFC" }, // design-ignore: literal meta theme-color, mirrors --surface light
+    { media: "(prefers-color-scheme: dark)", color: "#151823" }, // design-ignore: literal meta theme-color, mirrors --surface dark
+  ],
+  colorScheme: "dark light",
 };
 
 const personJsonLd = {
@@ -96,9 +108,9 @@ const personJsonLd = {
   alternateName: "LK",
   url: SITE_URL,
   image: `${SITE_URL}/opengraph-image`,
-  jobTitle: "React.js & MERN Developer",
+  jobTitle: "Technical Product Designer & Design Engineer",
   description:
-    "React.js Developer with 2+ years of experience building production-grade web applications across the MERN stack, Shopify, and WordPress.",
+    "Technical Product Designer & Design Engineer expanding from 2+ years of MERN development experience — UI/UX, design systems and AI-assisted product development, grounded in shipped production apps.",
   email: "mailto:lovepreetkaur7073@gmail.com",
   worksFor: {
     "@type": "Organization",
@@ -111,13 +123,17 @@ const personJsonLd = {
     addressCountry: "IN",
   },
   knowsAbout: [
+    "UI/UX Design",
+    "Product Design",
+    "Design Systems",
+    "Design Tokens",
+    "Claude Code",
     "React.js",
     "Next.js",
     "Node.js",
     "MongoDB",
     "Express.js",
     "Shopify",
-    "Liquid",
     "WordPress",
     "JavaScript",
     "TypeScript",
@@ -145,7 +161,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${onest.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`${onest.variable} ${mono.variable} ${fraunces.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <script
           type="application/ld+json"
@@ -155,8 +175,15 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
-        <SmoothHashScroll />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SmoothHashScroll />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -55,22 +55,39 @@ export function ProjectCard({
             />
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-center">
-              <div aria-hidden className="project-card-bg absolute inset-0 opacity-50" />
+              <div aria-hidden className="placeholder-tint absolute inset-0" />
               <ImageOff className="relative h-5 w-5 text-accent/50" />
               <span className="relative font-mono text-xs text-muted">
                 Screenshots coming soon
               </span>
             </div>
           )}
+          <span
+            aria-hidden
+            className="absolute bottom-2 right-3 select-none font-serif text-5xl font-semibold text-text/10"
+          >
+            {project.number}
+          </span>
         </div>
 
         {/* Content — short on purpose; full detail lives on the case study page */}
         <div className="flex flex-1 flex-col p-5">
-          <p className="mb-1.5 truncate font-mono text-xs uppercase tracking-eyebrow text-accent">
-            {project.category}
-          </p>
+          <div className="mb-1.5 flex items-center gap-2">
+            <span
+              className={`shrink-0 rounded-full px-2 py-0.5 font-mono text-xs font-semibold uppercase ${
+                project.group === "design"
+                  ? "bg-accent/15 text-accent"
+                  : "bg-surface-2 text-muted"
+              }`}
+            >
+              {project.group === "design" ? "Design" : "Dev"}
+            </span>
+            <p className="truncate font-mono text-xs uppercase tracking-eyebrow text-accent">
+              {project.category}
+            </p>
+          </div>
 
-          <h3 className="text-lg font-bold text-text transition-colors group-hover:text-accent">
+          <h3 className="font-serif text-xl font-semibold text-text transition-colors group-hover:text-accent">
             {project.title}
           </h3>
           <p className="mt-1 line-clamp-1 text-sm text-muted">

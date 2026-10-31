@@ -50,10 +50,21 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
 
         {/* Header + overview */}
         <header className="mb-10">
-          <p className="mb-3 font-mono text-xs uppercase tracking-eyebrow text-accent">
-            {project.category}
-          </p>
-          <h1 className="text-4xl font-bold tracking-tight text-text sm:text-5xl">
+          <div className="mb-3 flex items-center gap-2">
+            <span
+              className={`shrink-0 rounded-full px-2 py-0.5 font-mono text-xs font-semibold uppercase ${
+                project.group === "design"
+                  ? "bg-accent/15 text-accent"
+                  : "bg-surface-2 text-muted"
+              }`}
+            >
+              {project.group === "design" ? "Design" : "Dev"}
+            </span>
+            <p className="font-mono text-xs uppercase tracking-eyebrow text-accent">
+              {project.category}
+            </p>
+          </div>
+          <h1 className="font-serif text-4xl font-semibold tracking-tight text-text sm:text-5xl">
             {project.title}
           </h1>
           <p className="mt-2 text-lg text-muted">{project.subtitle}</p>
@@ -124,28 +135,32 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
         </header>
 
         {/* Role + Technology side by side */}
-        <div className="mb-10 grid grid-cols-1 gap-8 border-t border-border pt-8 sm:grid-cols-2">
-          {project.role && (
-            <Block label="My Role">
-              <ul className="flex flex-wrap gap-2">
-                {project.role.map((r) => (
-                  <li key={r}>
-                    <Tag>{r}</Tag>
-                  </li>
-                ))}
-              </ul>
-            </Block>
-          )}
-          <Block label="Technology">
-            <ul className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <li key={tag}>
-                  <Tag>{tag}</Tag>
-                </li>
-              ))}
-            </ul>
-          </Block>
-        </div>
+        {(project.role || project.tags.length > 0) && (
+          <div className="mb-10 grid grid-cols-1 gap-8 border-t border-border pt-8 sm:grid-cols-2">
+            {project.role && (
+              <Block label="My Role">
+                <ul className="flex flex-wrap gap-2">
+                  {project.role.map((r) => (
+                    <li key={r}>
+                      <Tag>{r}</Tag>
+                    </li>
+                  ))}
+                </ul>
+              </Block>
+            )}
+            {project.tags.length > 0 && (
+              <Block label="Technology">
+                <ul className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <li key={tag}>
+                      <Tag>{tag}</Tag>
+                    </li>
+                  ))}
+                </ul>
+              </Block>
+            )}
+          </div>
+        )}
 
         {/* Key Features */}
         {project.highlights && (
@@ -186,9 +201,9 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
           </div>
         )}
 
-        {/* Screenshots */}
+        {/* Key Screens / Screenshots — label reflects design vs. dev track */}
         <div className="border-t border-border pt-8">
-          <Block label="Screenshots">
+          <Block label={project.group === "design" ? "Key Screens" : "Screenshots"}>
             {project.images.length > 0 ? (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {project.images.map((img) => (
@@ -207,9 +222,10 @@ export function ProjectCaseStudy({ project }: { project: Project }) {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-surface-2 py-14 text-center">
-                <ImageOff className="h-5 w-5 text-muted" />
-                <p className="font-mono text-xs text-muted">
+              <div className="relative flex flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border border-dashed border-border bg-surface-2 py-14 text-center">
+                <div aria-hidden className="placeholder-tint absolute inset-0" />
+                <ImageOff className="relative h-5 w-5 text-muted" />
+                <p className="relative font-mono text-xs text-muted">
                   Screenshots coming soon
                 </p>
               </div>

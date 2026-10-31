@@ -5,19 +5,23 @@ import {
   Globe,
   Code2,
   Database,
-  Wrench,
+  PenTool,
+  Component,
+  Sparkles,
+  Palette,
 } from "lucide-react";
 
 export const profile = {
   name: "Lovepreet Kaur",
   initials: "LK",
   brand: "lk.dev",
-  role: "React.js & MERN Developer",
-  taglineParts: ["MERN", "Shopify", "WordPress"],
+  primaryRole: "Technical Product Designer",
+  secondaryRole: "MERN Stack Developer",
+  tagline: "Designing digital experiences. Engineering what's next.",
   shortBio:
-    "I build fast, responsive web apps and custom e-commerce experiences. Two years of crafting digital solutions across React, MERN, Shopify, and WordPress.",
+    "I combine product design thinking, UI engineering and AI-assisted development to create intuitive, visually compelling and functional digital experiences — grounded in 2+ years of shipping real production apps across React, MERN, Shopify and WordPress.",
   longBio:
-    "I'm a React.js Developer with 2+ years of experience building production-grade web applications. I focus on clean component structure, performant front-ends, and smooth user experiences — whether that's a custom Shopify storefront, a real-time MERN dashboard, or a bespoke WordPress site.",
+    "I started as a React.js / MERN Developer, building production apps across e-commerce, SaaS and real-time systems. That hands-on build experience is what's pulling me toward technical product design — I care as much about how an interface should look, flow and feel as I do about how it gets built. I'm expanding deliberately into UI/UX and design-systems work, backed by real shipped projects rather than theory: UI improvements on a live SaaS product, a design-systems lab built with Claude Code, and the frontend engineering to make any of it real.",
   location: "Rupnagar, Punjab, India",
   email: "lovepreetkaur7073@gmail.com",
   available: true,
@@ -43,12 +47,29 @@ export type ProjectLayout =
   | "gallery"
   | "interactive";
 
+// Which of the two portfolio tracks a project belongs to. Drives the section
+// it appears under (Projects.tsx / ProjectsExplorer.tsx) and which case-study
+// section labels ProjectCaseStudy uses.
+export type ProjectGroup = "design" | "development";
+
+export const projectGroups: Record<ProjectGroup, { label: string; eyebrow: string }> = {
+  design: {
+    label: "Product Design & UI Engineering",
+    eyebrow: "Design & UI Engineering",
+  },
+  development: {
+    label: "MERN Stack & Web Development",
+    eyebrow: "Web Development",
+  },
+};
+
 export type Project = {
   id: string;
   number: string;
   title: string;
   subtitle: string;
   category: string;
+  group: ProjectGroup;
   layout: ProjectLayout;
   description: string;
   /** My contribution — shown only when set (not every project needs it). */
@@ -75,50 +96,108 @@ export type Project = {
   clientCount?: number;
 };
 
-// The 5 featured projects — the portfolio's main story. Order is deliberate:
-// Bluespond (real SaaS) → AI UI Lab (differentiator) → Bidder Tracking (technical)
-// → Shopify (client work) → Buzz (full-stack/real-time).
+// The 7 featured projects — the portfolio's main story, split into two tracks
+// (see `group`): Product Design & UI Engineering leads, MERN Stack &
+// Web Development backs it up with real shipped technical work.
 export const featuredProjects: Project[] = [
   {
-    id: "bluespond",
+    id: "slotback",
     number: "01",
-    title: "Bluespond",
+    title: "Slotback",
     subtitle: "Business Management & Booking SaaS",
-    category: "SaaS / Product Development",
+    category: "SaaS Product UI & Experience Improvements",
+    group: "design",
     layout: "feature",
     description:
-      "A SaaS platform designed for service businesses to manage bookings, customers, staff, payments and customer recovery workflows.",
+      "Slotback is a SaaS booking and business-management platform for service businesses — scheduling, customers, staff, payments and customer recovery workflows.",
     role: [
-      "Frontend Development",
       "UI Implementation",
+      "UX Improvements",
+      "Frontend Development",
       "Feature Development",
       "Testing",
-      "UX Improvements",
     ],
     tags: ["React", "Laravel", "Filament", "Tailwind CSS", "Stripe", "JavaScript"],
     highlights: [
-      "Business onboarding",
-      "Business profiles",
+      "Business onboarding & profiles",
       "Booking & calendar management",
       "Staff management",
       "Customer management",
-      "Payments",
-      "Customer recovery",
+      "Payments & customer recovery",
       "Notifications",
       "Reports & insights",
+      "Reusable UI components",
     ],
     images: [
-      { src: "/bluespond-1.png", alt: "Bluespond landing page — client booking search" },
-      { src: "/bluespond-2.png", alt: "Bluespond category browse screen — \"What are you booking?\"" },
+      { src: "/slotback-1.png", alt: "Slotback hero section — client booking search" },
+      { src: "/slotback-2.png", alt: "Slotback category browse and staff calendar view" },
+      { src: "/slotback-3.png", alt: "Slotback multi-step booking flow — service selection" },
+      { src: "/slotback-4.png", alt: "Slotback marketplace — find a business" },
     ],
-    liveUrl: "https://bluespond.kodionsoftwares.com/",
+    liveUrl: "https://slotback-alpha.vercel.app",
+    repoUrl: "https://github.com/lovepreet7073/slotback",
+  },
+  {
+    id: "vendra",
+    number: "02",
+    title: "Vendra",
+    subtitle: "Travel Agency Website — UI Design Practice",
+    category: "UI Design Practice Project",
+    group: "design",
+    layout: "experimental",
+    description:
+      "Vendra — \"Travel, enjoy and live a new and full life.\" A travel agency website built as a UI design practice project and deployed for portfolio review — not a production product. Focused on homepage composition, destination exploration and visual hierarchy.",
+    tags: [],
+    highlights: [
+      "Hero with search",
+      "Destinations grid with pricing",
+      "Multi-step trip booking flow",
+      "Flight search & results",
+      "Login / auth screen",
+      "Responsive layouts",
+    ],
+    images: [
+      { src: "/vendra-1.png", alt: "Vendra hero section — \"Travel, enjoy and live a new and full life\"" },
+      { src: "/vendra-2.png", alt: "Vendra destinations grid with pricing and ratings" },
+      { src: "/vendra-3.png", alt: "Vendra trip booking flow — departure dates, travellers and accommodation" },
+      { src: "/vendra-4.png", alt: "Vendra login screen" },
+    ],
+    liveUrl: "https://travel-webiste-two.vercel.app",
+    repoUrl: "https://github.com/lovepreet7073/Travel-website",
+  },
+  {
+    id: "parcelio",
+    number: "03",
+    title: "Parcelio",
+    subtitle: "Parcel Shipping & Tracking UI — UI Design Practice",
+    category: "UI Design Practice Project",
+    group: "design",
+    layout: "experimental",
+    description:
+      "Parcelio — \"Ship it. Track it. Relax.\" A parcel delivery marketing site built as a UI design practice project and deployed for portfolio review — not a production product. Hero, testimonials and a how-it-works flow with a live mobile-booking preview.",
+    tags: [],
+    highlights: [
+      "Hero with live-tracking CTA",
+      "Testimonials carousel",
+      "How-it-works process flow",
+      "Mobile booking flow preview",
+      "Responsive layouts",
+    ],
+    images: [
+      { src: "/parcelio-1.png", alt: "Parcelio hero section — \"Ship parcels with confidence, track them in real time\"" },
+      { src: "/parcelio-2.png", alt: "Parcelio testimonials carousel" },
+      { src: "/parcelio-3.png", alt: "Parcelio \"How to get started\" process steps with mobile booking-flow preview" },
+    ],
+    liveUrl: "https://parcelio-phi.vercel.app",
+    repoUrl: "https://github.com/lovepreet7073/delivery-partner",
   },
   {
     id: "ai-ui-lab",
-    number: "02",
+    number: "04",
     title: "AI UI Engineering Lab",
-    subtitle: "AI-Assisted UI Development & Design Systems",
-    category: "AI / UI Engineering / R&D",
+    subtitle: "Design Systems, AI & Frontend Experiments",
+    category: "Design Systems & AI-Assisted UI Engineering",
+    group: "design",
     layout: "experimental",
     description:
       "An exploration of AI-assisted frontend development using Claude Code, structured design systems, reusable components and design tokens to create consistent web interfaces.",
@@ -165,10 +244,11 @@ export const featuredProjects: Project[] = [
   },
   {
     id: "bidder-tracking",
-    number: "03",
+    number: "05",
     title: "Bidder Tracking System",
     subtitle: "Real-Time Auction Monitoring Dashboard",
-    category: "Real-Time Web Application",
+    category: "Full-Stack Web Application",
+    group: "development",
     layout: "dashboard",
     description:
       "A real-time dashboard for tracking and analyzing bidder activity during online auctions.",
@@ -191,10 +271,11 @@ export const featuredProjects: Project[] = [
   },
   {
     id: "shopify-ecommerce",
-    number: "04",
+    number: "06",
     title: "Shopify E-commerce Projects",
     subtitle: "Client Storefronts & Custom E-commerce Experiences",
     category: "Client / Commercial Work",
+    group: "development",
     layout: "gallery",
     description:
       "A collection of Shopify storefronts customized for client brands using Liquid, responsive layouts, JavaScript and third-party integrations.",
@@ -220,10 +301,11 @@ export const featuredProjects: Project[] = [
   },
   {
     id: "buzz",
-    number: "05",
+    number: "07",
     title: "Buzz",
     subtitle: "Real-Time Chat Application",
     category: "Full-Stack / Real-Time",
+    group: "development",
     layout: "interactive",
     description:
       "A full-stack messaging application focused on real-time communication and interactive chat experiences.",
@@ -239,6 +321,9 @@ export const featuredProjects: Project[] = [
     repoUrl: "https://github.com/lovepreet7073",
   },
 ];
+
+export const designProjects = featuredProjects.filter((p) => p.group === "design");
+export const developmentProjects = featuredProjects.filter((p) => p.group === "development");
 
 // Smaller/earlier work — kept as lightweight links, not full case studies.
 export type OtherProject = {
@@ -271,6 +356,14 @@ export type Service = {
 export const services: Service[] = [
   {
     number: "01",
+    title: "Product & UI Design",
+    description:
+      "Interface design for web apps and dashboards, from wireframes through to a consistent, documented set of design tokens and components.",
+    tags: ["UI Design", "Design Systems", "Figma-to-Code", "Prototyping"],
+    Icon: Palette,
+  },
+  {
+    number: "02",
     title: "MERN Stack Development",
     description:
       "Custom full-stack apps with MongoDB, Express, React, and Node.js. REST APIs, authentication, real-time features, and deployment.",
@@ -278,7 +371,7 @@ export const services: Service[] = [
     Icon: Layers,
   },
   {
-    number: "02",
+    number: "03",
     title: "Shopify Development",
     description:
       "Custom Shopify themes, Liquid templating, app integrations, and performance-optimized storefronts that convert visitors into customers.",
@@ -286,7 +379,7 @@ export const services: Service[] = [
     Icon: ShoppingBag,
   },
   {
-    number: "03",
+    number: "04",
     title: "WordPress Development",
     description:
       "Bespoke WordPress themes, WooCommerce stores, and plugin development. Fast, secure, SEO-ready sites for any business.",
@@ -303,7 +396,32 @@ export type SkillGroup = {
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: "Frontend",
+    title: "Product & UI/UX Design",
+    Icon: PenTool,
+    items: [
+      "Interface Design",
+      "Responsive UI Design",
+      "UI Component Design",
+      "Design-to-Code Implementation",
+      "Design Consistency",
+      "Client Project Support",
+    ],
+  },
+  {
+    title: "Design Systems & UI Engineering",
+    Icon: Component,
+    items: [
+      "Design Tokens",
+      "Typography Systems",
+      "Colour Systems",
+      "Spacing Systems",
+      "Reusable Components",
+      "Component Architecture",
+      "Design-to-Code Workflows",
+    ],
+  },
+  {
+    title: "Frontend Development",
     Icon: Code2,
     items: [
       "React.js",
@@ -311,27 +429,37 @@ export const skillGroups: SkillGroup[] = [
       "JavaScript (ES6+)",
       "HTML5",
       "CSS3",
-      "Redux",
-      "Context API",
-      "Responsive Design",
+      "Tailwind CSS",
+      "Responsive Development",
+      "API Integration",
     ],
   },
   {
-    title: "Backend & Database",
+    title: "Full Stack Development",
     Icon: Database,
-    items: ["Node.js", "Express.js", "REST APIs", "Socket.IO", "MongoDB"],
+    items: ["Node.js", "Express.js", "MongoDB", "REST APIs", "Socket.IO"],
   },
   {
-    title: "CMS & E-commerce",
-    Icon: ShoppingBag,
-    items: ["Shopify", "Liquid", "Theme Customization", "WordPress"],
-  },
-  {
-    title: "Tools & Workflow",
-    Icon: Wrench,
-    items: ["Git", "GitHub", "Postman", "npm", "Chrome Extension APIs", "Agile"],
+    title: "AI & Development Workflows",
+    Icon: Sparkles,
+    items: [
+      "Claude",
+      "Claude Code",
+      "Claude Code Skills",
+      "Claude Code Plugins",
+      "AI-Assisted UI Development",
+      "Workflow Automation",
+    ],
   },
 ];
+
+// Short, recruiter-facing value pillars shown under the Hero bio.
+export const valuePillars = [
+  "Product-minded",
+  "Ships fast",
+  "AI-native workflow",
+  "Real production experience",
+] as const;
 
 export const navLinks = [
   { label: "Home", href: "#home" },

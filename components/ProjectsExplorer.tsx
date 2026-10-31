@@ -4,18 +4,16 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, Filter } from "lucide-react";
-import { featuredProjects, otherProjects } from "@/lib/data";
+import { featuredProjects, otherProjects, projectGroups, type ProjectGroup } from "@/lib/data";
 import { ProjectCard } from "./ProjectCard";
 
 const filters = [
   { id: "all", label: "All" },
-  ...Array.from(new Set(featuredProjects.map((p) => p.category))).map((c) => ({
-    id: c,
-    label: c,
-  })),
+  { id: "design", label: projectGroups.design.label },
+  { id: "development", label: projectGroups.development.label },
 ] as const;
 
-type FilterId = (typeof filters)[number]["id"];
+type FilterId = "all" | ProjectGroup;
 
 export function ProjectsExplorer() {
   const [active, setActive] = useState<FilterId>("all");
@@ -24,7 +22,7 @@ export function ProjectsExplorer() {
     () =>
       active === "all"
         ? featuredProjects
-        : featuredProjects.filter((p) => p.category === active),
+        : featuredProjects.filter((p) => p.group === active),
     [active]
   );
 
@@ -47,13 +45,13 @@ export function ProjectsExplorer() {
           <p className="mb-3 text-xs font-semibold uppercase tracking-eyebrow text-accent">
             All Work
           </p>
-          <h1 className="text-4xl font-bold tracking-tight text-text sm:text-5xl">
+          <h1 className="font-serif text-4xl font-semibold tracking-tight text-text sm:text-5xl">
             Every project I&apos;ve shipped
           </h1>
           <div className="mt-4 h-1 w-16 rounded-full bg-accent" />
           <p className="mt-5 max-w-2xl text-base text-muted sm:text-lg">
-            Real SaaS experience, client work, and the experiments that shaped
-            how I build. Open a project for the full case study.
+            Product design and UI engineering work, backed by real MERN and
+            full-stack development. Open a project for the full case study.
           </p>
         </motion.div>
 

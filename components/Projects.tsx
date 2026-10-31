@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { featuredProjects } from "@/lib/data";
+import { designProjects, developmentProjects, projectGroups } from "@/lib/data";
 import { SectionHeader } from "./ui/SectionHeader";
 import { ProjectCard } from "./ProjectCard";
 
@@ -11,19 +11,31 @@ export function Projects() {
     <section id="projects" className="py-20 sm:py-24">
       <div className="container-x">
         <SectionHeader
-          eyebrow="Featured Work"
-          title="Things I've Built"
-          subtitle="From a production SaaS to real-time dashboards and client storefronts."
+          eyebrow="Selected Work"
+          title="Design & Development"
+          subtitle="Product design and UI engineering first, backed by real MERN/full-stack work."
         />
 
+        <p className="mb-5 font-mono text-xs uppercase tracking-eyebrow text-accent">
+          {projectGroups.design.eyebrow}
+        </p>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredProjects.map((project, i) => (
+          {designProjects.map((project, i) => (
             <ProjectCard
               key={project.id}
               project={project}
               index={i}
               highlight={i === 0}
             />
+          ))}
+        </div>
+
+        <p className="mb-5 mt-14 font-mono text-xs uppercase tracking-eyebrow text-accent">
+          {projectGroups.development.eyebrow}
+        </p>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {developmentProjects.map((project, i) => (
+            <ProjectCard key={project.id} project={project} index={i} />
           ))}
         </div>
 
