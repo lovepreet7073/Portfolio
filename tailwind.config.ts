@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -20,8 +19,14 @@ const config: Config = {
         "accent-strong": "rgb(var(--accent-strong) / <alpha-value>)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        sans: ["var(--font-onest)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+      },
+      aspectRatio: {
+        card: "16 / 10",
+      },
+      letterSpacing: {
+        eyebrow: "0.2em",
       },
       animation: {
         "fade-up": "fadeUp 0.6s ease-out forwards",

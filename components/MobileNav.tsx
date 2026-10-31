@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Home, Briefcase, Code2, Mail } from "lucide-react";
 import { navLinks } from "@/lib/data";
 
@@ -13,6 +14,9 @@ const icons = {
 } as const;
 
 export function MobileNav() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   const [active, setActive] = useState<string>("#home");
 
   useEffect(() => {
@@ -42,11 +46,11 @@ export function MobileNav() {
       <ul className="grid grid-cols-4">
         {navLinks.map((link) => {
           const Icon = icons[link.label as keyof typeof icons];
-          const isActive = active === link.href;
+          const isActive = isHome && active === link.href;
           return (
             <li key={link.href}>
               <Link
-                href={link.href}
+                href={isHome ? link.href : `/${link.href}`}
                 className={`flex flex-col items-center gap-1 px-2 py-3 text-xs font-medium transition-colors ${
                   isActive
                     ? "bg-accent/10 text-accent"

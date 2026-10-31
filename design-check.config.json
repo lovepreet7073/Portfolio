@@ -1,0 +1,5 @@
+{
+  "dirs": ["app", "components", "lib"],
+  "tokenFiles": ["app/globals.css", "tailwind.config.ts"],
+  "uiDir": "components/ui"
+}

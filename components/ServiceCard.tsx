@@ -19,10 +19,10 @@ export function ServiceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-2xl border-l-2 border-l-accent/40 border-t border-r border-b border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-l-accent hover:shadow-2xl hover:shadow-accent/10"
+      className="group relative overflow-hidden rounded-3xl border-l-2 border-l-accent/40 border-t border-r border-b border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-l-accent hover:shadow-2xl hover:shadow-accent/10"
     >
       <div className="mb-5 flex items-start justify-between">
-        <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors group-hover:bg-accent/20">
+        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent/20">
           <Icon className="h-6 w-6" />
         </span>
         <span className="font-mono text-sm text-muted">{service.number}</span>

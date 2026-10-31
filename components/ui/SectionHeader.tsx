@@ -17,7 +17,7 @@ export function SectionHeader({ eyebrow, title, subtitle }: Props) {
       transition={{ duration: 0.5 }}
       className="mb-10 max-w-2xl"
     >
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+      <p className="mb-3 text-xs font-semibold uppercase tracking-eyebrow text-accent">
         {eyebrow}
       </p>
       <h2 className="text-4xl font-bold tracking-tight text-text sm:text-5xl">

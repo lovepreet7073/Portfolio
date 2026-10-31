@@ -24,7 +24,7 @@ export function Services() {
         <div className="mt-12 flex justify-center">
           <a
             href="#contact"
-            className="group inline-flex items-center gap-2 rounded-md border border-accent/40 px-6 py-3 font-mono text-sm text-accent transition-colors hover:bg-accent/10"
+            className="group inline-flex items-center gap-2 rounded-full border border-accent/40 px-6 py-3 font-mono text-sm text-accent transition-colors hover:bg-accent/10"
           >
             Discuss Your Project
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

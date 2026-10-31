@@ -63,9 +63,9 @@ export function About() {
               {facts.map(({ Icon, label, value }) => (
                 <li
                   key={label}
-                  className="flex items-start gap-4 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent/40"
+                  className="flex items-start gap-4 rounded-2xl border border-border bg-surface p-4 transition-colors hover:border-accent/40"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                     <Icon className="h-5 w-5" />
                   </span>
                   <div>

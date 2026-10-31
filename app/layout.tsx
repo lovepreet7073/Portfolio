@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { Onest, JetBrains_Mono } from "next/font/google";
 import { SmoothHashScroll } from "@/components/SmoothHashScroll";
 import "./globals.css";
 
-const inter = Inter({
+const onest = Onest({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-onest",
   display: "swap",
 });
 
@@ -86,11 +85,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0ea5e9" },
-    { media: "(prefers-color-scheme: dark)", color: "#5eead4" },
-  ],
-  colorScheme: "dark light",
+  themeColor: "#1F2025", // design-ignore: literal meta theme-color, mirrors --surface (see DESIGN.md)
+  colorScheme: "dark",
 };
 
 const personJsonLd = {
@@ -149,11 +145,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${mono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${onest.variable} ${mono.variable}`}>
       <body>
         <script
           type="application/ld+json"
@@ -163,15 +155,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SmoothHashScroll />
-          {children}
-        </ThemeProvider>
+        <SmoothHashScroll />
+        {children}
       </body>
     </html>
   );

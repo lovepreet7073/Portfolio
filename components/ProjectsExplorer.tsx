@@ -3,14 +3,16 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Filter } from "lucide-react";
-import { projects } from "@/lib/data";
+import { ArrowLeft, ArrowUpRight, Filter } from "lucide-react";
+import { featuredProjects, otherProjects } from "@/lib/data";
 import { ProjectCard } from "./ProjectCard";
 
 const filters = [
   { id: "all", label: "All" },
-  { id: "ecommerce", label: "E-commerce" },
-  { id: "web", label: "Web / MERN" },
+  ...Array.from(new Set(featuredProjects.map((p) => p.category))).map((c) => ({
+    id: c,
+    label: c,
+  })),
 ] as const;
 
 type FilterId = (typeof filters)[number]["id"];
@@ -21,8 +23,8 @@ export function ProjectsExplorer() {
   const filtered = useMemo(
     () =>
       active === "all"
-        ? projects
-        : projects.filter((p) => p.category === active),
+        ? featuredProjects
+        : featuredProjects.filter((p) => p.category === active),
     [active]
   );
 
@@ -42,7 +44,7 @@ export function ProjectsExplorer() {
           transition={{ duration: 0.5 }}
           className="mb-10"
         >
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-eyebrow text-accent">
             All Work
           </p>
           <h1 className="text-4xl font-bold tracking-tight text-text sm:text-5xl">
@@ -50,9 +52,8 @@ export function ProjectsExplorer() {
           </h1>
           <div className="mt-4 h-1 w-16 rounded-full bg-accent" />
           <p className="mt-5 max-w-2xl text-base text-muted sm:text-lg">
-            From client e-commerce stores to real-time MERN apps — here&apos;s
-            the full list. Live demos, source code, and case-study walkthroughs
-            where available.
+            Real SaaS experience, client work, and the experiments that shaped
+            how I build. Open a project for the full case study.
           </p>
         </motion.div>
 
@@ -67,33 +68,26 @@ export function ProjectsExplorer() {
             <Filter className="h-3.5 w-3.5 text-accent" />
             filter:
           </span>
-          <div className="flex flex-wrap items-center gap-1 rounded-lg border border-border bg-surface p-1">
-            {filters.map((f) => {
-              const count =
-                f.id === "all"
-                  ? projects.length
-                  : projects.filter((p) => p.category === f.id).length;
-              return (
-                <button
-                  key={f.id}
-                  type="button"
-                  onClick={() => setActive(f.id)}
-                  className={`rounded-md px-3 py-1.5 font-mono text-xs transition-colors ${
-                    active === f.id
-                      ? "bg-accent text-bg"
-                      : "text-muted hover:text-text"
-                  }`}
-                >
-                  {f.label}{" "}
-                  <span className="opacity-70">({count})</span>
-                </button>
-              );
-            })}
+          <div className="flex flex-wrap items-center gap-1 rounded-full border border-border bg-surface p-1">
+            {filters.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                onClick={() => setActive(f.id)}
+                className={`rounded-full px-3 py-1.5 font-mono text-xs transition-colors ${
+                  active === f.id
+                    ? "bg-accent text-bg"
+                    : "text-muted hover:text-text"
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
           </div>
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p, i) => (
             <ProjectCard key={p.id} project={p} index={i} />
           ))}
@@ -104,6 +98,44 @@ export function ProjectsExplorer() {
             No projects in this category yet.
           </p>
         )}
+
+        {/* Other experiments */}
+        <div className="mt-16 border-t border-border pt-10">
+          <p className="mb-5 font-mono text-xs uppercase tracking-eyebrow text-accent">
+            Other experiments
+          </p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {otherProjects.map((p) => (
+              <a
+                key={p.title}
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between gap-3 rounded-2xl border border-border bg-surface p-5 transition-colors hover:border-accent/40"
+              >
+                <div>
+                  <p className="font-semibold text-text group-hover:text-accent">
+                    {p.title}
+                  </p>
+                  <p className="mt-1 text-sm text-muted">{p.description}</p>
+                </div>
+                <ArrowUpRight className="h-4 w-4 shrink-0 text-muted transition-colors group-hover:text-accent" />
+              </a>
+            ))}
+          </div>
+          <p className="mt-6 text-sm text-muted">
+            More experiments on{" "}
+            <a
+              href="https://github.com/lovepreet7073"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline"
+            >
+              GitHub
+            </a>
+            .
+          </p>
+        </div>
       </div>
     </section>
   );

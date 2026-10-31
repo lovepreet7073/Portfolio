@@ -18,8 +18,8 @@ type InfoCardProps = {
 
 function InfoCard({ Icon, label, value, href, badge }: InfoCardProps) {
   const inner = (
-    <div className="flex items-start gap-4 rounded-xl border border-border bg-surface-2 p-4 transition-colors hover:border-accent/40">
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
+    <div className="flex items-start gap-4 rounded-2xl border border-border bg-surface-2 p-4 transition-colors hover:border-accent/40">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
         <Icon className="h-5 w-5" />
       </span>
       <div className="min-w-0 flex-1">
@@ -104,8 +104,8 @@ export function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="space-y-5 lg:col-span-5"
           >
-            <div className="rounded-2xl border border-border bg-surface p-6">
-              <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            <div className="rounded-3xl border border-border bg-surface p-6">
+              <p className="mb-1 text-xs font-semibold uppercase tracking-eyebrow text-accent">
                 Contact Info
               </p>
               <h3 className="mb-5 text-2xl font-bold text-text">
@@ -121,7 +121,7 @@ export function Contact() {
               </ul>
 
               <div className="mt-6">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-eyebrow text-accent">
                   Find me on
                 </p>
                 <div className="flex gap-2">
@@ -134,7 +134,7 @@ export function Contact() {
                         target={isExternal ? "_blank" : undefined}
                         rel={isExternal ? "noopener noreferrer" : undefined}
                         aria-label={label}
-                        className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-surface-2 text-muted transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent"
+                        className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-surface-2 text-muted transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent"
                       >
                         <Icon className="h-5 w-5" />
                       </a>

@@ -176,7 +176,7 @@ export function ContactForm() {
           onBlur={() => onBlur("message")}
           aria-invalid={errors.message ? "true" : "false"}
           aria-describedby={errors.message ? "message-error" : undefined}
-          className={`w-full resize-y rounded-lg border bg-surface-2 px-4 py-3 text-sm text-text placeholder:text-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 ${
+          className={`w-full resize-y rounded-xl border bg-surface-2 px-4 py-3 text-sm text-text placeholder:text-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 ${
             errors.message
               ? "border-red-500/60 focus:border-red-500"
               : "border-border focus:border-accent"
@@ -190,7 +190,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="group flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3.5 text-sm font-semibold text-bg transition-all hover:bg-accent-strong disabled:opacity-60"
+        className="group flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-bg transition-all hover:bg-accent-strong disabled:opacity-60"
       >
         {status === "submitting" && (
           <>
@@ -220,7 +220,7 @@ export function ContactForm() {
       )}
 
       {status === "error" && (
-        <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-4 text-center text-sm">
+        <div className="rounded-xl border border-red-500/30 bg-red-500/5 p-4 text-center text-sm">
           <p className="flex items-center justify-center gap-2 text-red-500">
             <AlertCircle className="h-4 w-4" />
             {errorText}
@@ -291,7 +291,7 @@ function Field({
         onBlur={onBlur}
         aria-invalid={error ? "true" : "false"}
         aria-describedby={error ? `${id}-error` : undefined}
-        className={`w-full rounded-lg border bg-surface-2 px-4 py-3 text-sm text-text placeholder:text-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 ${
+        className={`w-full rounded-xl border bg-surface-2 px-4 py-3 text-sm text-text placeholder:text-muted/60 transition-colors focus:outline-none focus:ring-2 focus:ring-accent/20 ${
           error
             ? "border-red-500/60 focus:border-red-500"
             : "border-border focus:border-accent"

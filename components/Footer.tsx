@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="border-t border-border bg-surface/50 pb-24 md:pb-0">
       <div className="container-x flex flex-col items-center justify-between gap-6 py-8 md:flex-row">
         <div className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md border border-accent/40 bg-surface font-mono text-sm font-semibold text-accent">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/40 bg-accent/10 font-mono text-sm font-semibold text-accent">
             {profile.initials.charAt(0)}
           </span>
           <span className="font-mono text-sm font-semibold text-text">

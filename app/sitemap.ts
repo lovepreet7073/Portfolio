@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { featuredProjects } from "@/lib/data";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ??
@@ -20,5 +21,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...featuredProjects.map((p) => ({
+      url: `${SITE_URL}/projects/${p.id}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
   ];
 }

@@ -31,89 +31,234 @@ export const profile = {
   },
 } as const;
 
+export type ProjectImage = { src: string; alt: string };
+
+// "feature" = large hero case study, "experimental" = design-focused,
+// "dashboard" = technical/data-driven, "gallery" = visual e-commerce grid,
+// "interactive" = full-stack/product card. Drives ProjectCard's layout variant.
+export type ProjectLayout =
+  | "feature"
+  | "experimental"
+  | "dashboard"
+  | "gallery"
+  | "interactive";
+
 export type Project = {
   id: string;
-  title: string;
   number: string;
-  tags: string[];
+  title: string;
+  subtitle: string;
+  category: string;
+  layout: ProjectLayout;
   description: string;
-  featured?: boolean;
-  category: "ecommerce" | "web" | "mobile";
+  /** My contribution — shown only when set (not every project needs it). */
+  role?: string[];
+  tags: string[];
+  /** Key features / highlights — rendered as a bullet list on the card and case study. */
+  highlights?: string[];
+  /** Pipeline/process steps — currently only AI UI Engineering Lab has one. */
+  process?: string[];
+  /** Multiple named live links — e.g. several client stores for one grouped project. */
+  stores?: { name: string; url: string }[];
+  /**
+   * Real screenshots first. Empty array renders a "screenshot coming soon" placeholder.
+   * An illustrative stock photo (clearly labeled as such in `alt`) is acceptable only
+   * as a supplementary image alongside at least one real screenshot — never as a
+   * stand-in for missing product screenshots.
+   */
+  images: ProjectImage[];
   liveUrl?: string;
   repoUrl?: string;
+  /** Client/professional work with no public demo or repo — case study shows a note instead of dead links. */
+  confidential?: boolean;
   inProgress?: boolean;
   clientCount?: number;
-  image?: string;
 };
 
-// Single source of truth for all projects.
-// `featured: true` projects show on the home page Projects section.
-// All projects show on /projects.
-// Add `liveUrl` if it has a public demo, `repoUrl` if code is on GitHub.
-// Bidder Tracking System has neither — card auto-falls back to "In Progress".
-export const projects: Project[] = [
+// The 5 featured projects — the portfolio's main story. Order is deliberate:
+// Bluespond (real SaaS) → AI UI Lab (differentiator) → Bidder Tracking (technical)
+// → Shopify (client work) → Buzz (full-stack/real-time).
+export const featuredProjects: Project[] = [
   {
-    id: "shopify-stores",
+    id: "bluespond",
     number: "01",
-    title: "Shopify Client Stores",
-    featured: true,
-    category: "ecommerce",
-    tags: ["Shopify", "Liquid", "JavaScript"],
+    title: "Bluespond",
+    subtitle: "Business Management & Booking SaaS",
+    category: "SaaS / Product Development",
+    layout: "feature",
     description:
-      "Customized storefronts for 6 brands — Archivi del Reparto, Cruel Hand Luke, Smokehalo, Workmode-2, Palm Hills, Dandy Hats. Liquid templating, responsive layouts, and third-party app integrations.",
-    clientCount: 6,
-    liveUrl: "https://archividelreparto.com",
-    image: "/shopify-stores.png",
+      "A SaaS platform designed for service businesses to manage bookings, customers, staff, payments and customer recovery workflows.",
+    role: [
+      "Frontend Development",
+      "UI Implementation",
+      "Feature Development",
+      "Testing",
+      "UX Improvements",
+    ],
+    tags: ["React", "Laravel", "Filament", "Tailwind CSS", "Stripe", "JavaScript"],
+    highlights: [
+      "Business onboarding",
+      "Business profiles",
+      "Booking & calendar management",
+      "Staff management",
+      "Customer management",
+      "Payments",
+      "Customer recovery",
+      "Notifications",
+      "Reports & insights",
+    ],
+    images: [
+      { src: "/bluespond-1.png", alt: "Bluespond landing page — client booking search" },
+      { src: "/bluespond-2.png", alt: "Bluespond category browse screen — \"What are you booking?\"" },
+    ],
+    liveUrl: "https://bluespond.kodionsoftwares.com/",
+  },
+  {
+    id: "ai-ui-lab",
+    number: "02",
+    title: "AI UI Engineering Lab",
+    subtitle: "AI-Assisted UI Development & Design Systems",
+    category: "AI / UI Engineering / R&D",
+    layout: "experimental",
+    description:
+      "An exploration of AI-assisted frontend development using Claude Code, structured design systems, reusable components and design tokens to create consistent web interfaces.",
+    tags: [
+      "Claude Code",
+      "Claude Code Skills",
+      "Claude Code Plugins",
+      "Design Systems",
+      "Design Tokens",
+      "Reusable Components",
+      "Responsive Design",
+    ],
+    highlights: [
+      "Claude Code",
+      "Claude Code skills",
+      "Claude Code plugins",
+      "DESIGN.md / design systems",
+      "Design tokens",
+      "Reusable components",
+      "Responsive UI",
+      "UI consistency",
+      "AI-assisted development",
+    ],
+    process: [
+      "Idea",
+      "UI Design",
+      "DESIGN.md",
+      "Design Tokens",
+      "Reusable Components",
+      "Claude Code",
+      "Implementation",
+      "Visual Testing",
+    ],
+    images: [
+      {
+        src: "/ai-ui-lab-wireframe.jpg",
+        alt: "Illustrative photo of wireframe sketches on a tablet (stand-in photo — Alvaro Reyes / Unsplash, not a real screenshot)",
+      },
+      {
+        src: "/ai-ui-lab-code.jpg",
+        alt: "Illustrative photo of a dark-mode code editor (stand-in photo — Jakub Żerdzicki / Unsplash, not a real screenshot)",
+      },
+    ],
   },
   {
     id: "bidder-tracking",
-    number: "02",
-    title: "Bidder Tracking System",
-    featured: true,
-    category: "web",
-    tags: ["React", "Node.js", "MongoDB", "Socket.IO"],
-    description:
-      "Live dashboard to track and analyze bidder activity during online auctions. Real-time data updates via WebSockets without page refresh.",
-    inProgress: true,
-    image: "/bidder-tracking-system.png",
-  },
-  {
-    id: "waxxbrandz",
     number: "03",
-    title: "WaxxBrandz",
-    featured: true,
-    category: "ecommerce",
-    tags: ["WordPress", "PHP", "JavaScript"],
+    title: "Bidder Tracking System",
+    subtitle: "Real-Time Auction Monitoring Dashboard",
+    category: "Real-Time Web Application",
+    layout: "dashboard",
     description:
-      "Custom WordPress site with bespoke theme, fully responsive design, and front-end performance optimizations for a real client brand.",
-    liveUrl: "https://waxxbrandz.com",
-    image: "/wordpress-waxxbrandz.png",
+      "A real-time dashboard for tracking and analyzing bidder activity during online auctions.",
+    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "WebSockets / Socket.IO"],
+    highlights: [
+      "Real-time bidder activity",
+      "Live dashboard updates",
+      "WebSocket communication",
+      "Data-driven interface",
+      "Updates without page refresh",
+    ],
+    images: [
+      { src: "/bidder-tracking-system.png", alt: "Bidder Tracking System dashboard" },
+      {
+        src: "/bidder-tracking-livedata.jpg",
+        alt: "Illustrative dark-mode live data chart, evoking real-time bid activity (stand-in photo — Maxim Hopman / Unsplash, not the real product UI)",
+      },
+    ],
+    inProgress: true,
   },
   {
-    id: "buzz-chat",
+    id: "shopify-ecommerce",
     number: "04",
-    title: "Buzz — Chat App",
-    category: "web",
-    tags: ["React", "Socket.IO", "Node.js", "MongoDB"],
+    title: "Shopify E-commerce Projects",
+    subtitle: "Client Storefronts & Custom E-commerce Experiences",
+    category: "Client / Commercial Work",
+    layout: "gallery",
     description:
-      "Real-time messaging app with custom WebSocket hook, typing indicators, and online presence.",
-    repoUrl: "https://github.com/lovepreet7073",
-    image: "/chat-app.png",
+      "A collection of Shopify storefronts customized for client brands using Liquid, responsive layouts, JavaScript and third-party integrations.",
+    tags: ["Shopify Liquid", "Theme Customization", "Custom Sections", "JavaScript"],
+    highlights: [
+      "Shopify Liquid",
+      "Theme customization",
+      "Custom sections",
+      "Responsive layouts",
+      "JavaScript",
+      "Third-party integrations",
+    ],
+    images: [
+      { src: "/shopify-1.png", alt: "Archivi del Reparto — client Shopify storefront" },
+      { src: "/shopify-stores.png", alt: "Shopify client storefront" },
+    ],
+    stores: [
+      { name: "Cruel Hand Luke", url: "https://cruelhandluke.com/" },
+      { name: "Archivi del Reparto", url: "https://adr-001.com/" },
+      { name: "Palm Hills Authentic", url: "https://www.palmhillsauthentic.com/" },
+    ],
+    clientCount: 6,
   },
   {
-    id: "bitebook",
+    id: "buzz",
     number: "05",
-    title: "BiteBook — Recipe App",
-    category: "web",
-    tags: ["React", "Express", "MongoDB"],
+    title: "Buzz",
+    subtitle: "Real-Time Chat Application",
+    category: "Full-Stack / Real-Time",
+    layout: "interactive",
     description:
-      "Recipe sharing platform with image uploads, comments, REST API backend, and responsive UI.",
+      "A full-stack messaging application focused on real-time communication and interactive chat experiences.",
+    tags: ["React.js", "Node.js", "MongoDB", "Socket.IO"],
+    highlights: [
+      "Real-time messaging",
+      "Online/offline status",
+      "Typing indicators",
+      "WebSocket communication",
+      "Custom WebSocket hook",
+    ],
+    images: [{ src: "/chat-app.png", alt: "Buzz chat application interface" }],
     repoUrl: "https://github.com/lovepreet7073",
-    image: "/recipe-website.png",
   },
 ];
 
-export const featuredProjects = projects.filter((p) => p.featured);
+// Smaller/earlier work — kept as lightweight links, not full case studies.
+export type OtherProject = {
+  title: string;
+  description: string;
+  href: string;
+};
+
+export const otherProjects: OtherProject[] = [
+  {
+    title: "WaxxBrandz",
+    description: "Custom WordPress theme, built responsive and performance-tuned for a client brand.",
+    href: "https://waxxbrandz.com",
+  },
+  {
+    title: "BiteBook — Recipe App",
+    description: "Recipe sharing platform with image uploads, comments, and a REST API backend.",
+    href: "https://github.com/lovepreet7073",
+  },
+];
 
 export type Service = {
   number: string;

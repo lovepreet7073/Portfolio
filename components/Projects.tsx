@@ -11,21 +11,26 @@ export function Projects() {
     <section id="projects" className="py-20 sm:py-24">
       <div className="container-x">
         <SectionHeader
-          eyebrow="Featured Projects"
+          eyebrow="Featured Work"
           title="Things I've Built"
-          subtitle="A selection of my best work across stacks."
+          subtitle="From a production SaaS to real-time dashboards and client storefronts."
         />
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={i}
+              highlight={i === 0}
+            />
           ))}
         </div>
 
         <div className="mt-12 flex justify-center">
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-2 rounded-md border border-accent/40 px-6 py-3 font-mono text-sm text-accent transition-colors hover:bg-accent/10"
+            className="group inline-flex items-center gap-2 rounded-full border border-accent/40 px-6 py-3 font-mono text-sm text-accent transition-colors hover:bg-accent/10"
           >
             View All Projects
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

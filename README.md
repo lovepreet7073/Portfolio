@@ -1,6 +1,8 @@
 # Lovepreet Kaur — Portfolio
 
-Personal portfolio site built with **Next.js 14**, **Tailwind CSS**, **TypeScript**, and **Framer Motion**. Dark/light theme, fully responsive (mobile bottom-nav included), and ready to deploy to Vercel.
+Personal portfolio site built with **Next.js 14**, **Tailwind CSS**, **TypeScript**, and **Framer Motion**. Dark-only theme, fully responsive (mobile bottom-nav included), and ready to deploy to Vercel.
+
+See [DESIGN.md](DESIGN.md) for the design system (colors, type, spacing, components) and [COMPONENTS.md](COMPONENTS.md) for the shared component inventory.
 
 ## Stack
 
@@ -8,7 +10,6 @@ Personal portfolio site built with **Next.js 14**, **Tailwind CSS**, **TypeScrip
 - [Tailwind CSS 3.4](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Framer Motion](https://www.framer.com/motion/) — animations
-- [next-themes](https://github.com/pacocoursey/next-themes) — dark/light toggle
 - [Lucide](https://lucide.dev/) — icons
 
 ## Run locally

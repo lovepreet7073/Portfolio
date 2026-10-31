@@ -2,11 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { profile, navLinks } from "@/lib/data";
-import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "./ui/Button";
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`);
+
   const [active, setActive] = useState<string>("#home");
   const [scrolled, setScrolled] = useState(false);
 
@@ -39,54 +43,48 @@ export function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-border bg-bg/80 backdrop-blur-md"
-          : "border-b border-transparent"
-      }`}
-    >
-      <nav className="container-x flex h-16 items-center justify-between sm:h-20">
+    <header className="fixed inset-x-0 top-0 z-40 px-4 pt-4 sm:px-6">
+      <nav
+        className={`container-x flex h-14 items-center justify-between rounded-full border px-4 transition-all duration-300 sm:h-16 sm:px-5 ${
+          scrolled
+            ? "border-border bg-surface/90 shadow-lg shadow-black/20 backdrop-blur-md"
+            : "border-border/60 bg-surface/60 backdrop-blur-md"
+        }`}
+      >
         <Link
-          href="#home"
+          href={hrefFor("#home")}
           className="flex items-center gap-2 font-mono text-base font-semibold"
           aria-label="Home"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-md border border-accent/40 bg-surface text-accent">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-accent">
             {profile.initials.charAt(0)}
           </span>
           <span className="hidden text-text sm:inline">{profile.brand}</span>
         </Link>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-1 rounded-full md:flex">
           {navLinks.map((link) => {
-            const isActive = active === link.href;
+            const isActive = isHome && active === link.href;
             return (
               <li key={link.href}>
                 <Link
-                  href={link.href}
-                  className={`group relative text-sm font-medium transition-colors ${
-                    isActive ? "text-text" : "text-muted hover:text-text"
+                  href={hrefFor(link.href)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    isActive
+                      ? "bg-accent/15 text-accent"
+                      : "text-muted hover:text-text"
                   }`}
                 >
                   {link.label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-0.5 bg-accent transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                  />
                 </Link>
               </li>
             );
           })}
         </ul>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <ThemeToggle />
-          <Button href="#contact" variant="outline" className="hidden sm:inline-flex">
-            Hire Me
-          </Button>
-        </div>
+        <Button href={hrefFor("#contact")} variant="primary" className="!px-4 !py-2 text-xs sm:!px-6 sm:!py-2.5 sm:text-sm">
+          Hire Me
+        </Button>
       </nav>
     </header>
   );

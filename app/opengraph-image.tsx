@@ -1,3 +1,7 @@
+// design-ignore-file: next/og ImageResponse is rendered by Satori at the edge,
+// which requires literal inline styles and hex colors — Tailwind classes and
+// CSS custom properties don't apply here. Values below are hand-mirrored from
+// DESIGN.md's color tokens.
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
@@ -17,8 +21,8 @@ export default async function OpengraphImage() {
           justifyContent: "space-between",
           padding: "80px",
           background:
-            "linear-gradient(135deg, #050b18 0%, #0a1628 50%, #0f1d33 100%)",
-          color: "#e2e8f0",
+            "linear-gradient(135deg, #16171A 0%, #1F2025 50%, #202228 100%)",
+          color: "#FFFFFF",
           fontFamily: "sans-serif",
           position: "relative",
         }}
@@ -28,7 +32,7 @@ export default async function OpengraphImage() {
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(circle at 85% 15%, rgba(94, 234, 212, 0.18) 0%, transparent 45%), radial-gradient(circle at 10% 90%, rgba(45, 212, 191, 0.12) 0%, transparent 45%)",
+              "radial-gradient(circle at 85% 15%, rgba(63, 134, 114, 0.35) 0%, transparent 45%), radial-gradient(circle at 10% 90%, rgba(79, 169, 138, 0.2) 0%, transparent 45%)",
             display: "flex",
           }}
         />
@@ -46,11 +50,11 @@ export default async function OpengraphImage() {
               width: "64px",
               height: "64px",
               borderRadius: "14px",
-              background: "linear-gradient(135deg, #5eead4, #2dd4bf)",
+              background: "linear-gradient(135deg, #4FA98A, #3F8672)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#050b18",
+              color: "#16171A",
               fontSize: "30px",
               fontWeight: 800,
               letterSpacing: "-0.02em",
@@ -61,7 +65,7 @@ export default async function OpengraphImage() {
           <div
             style={{
               fontSize: "24px",
-              color: "#94a3b8",
+              color: "#9CA3AF",
               fontFamily: "monospace",
               display: "flex",
             }}
@@ -81,7 +85,7 @@ export default async function OpengraphImage() {
           <div
             style={{
               fontSize: "30px",
-              color: "#5eead4",
+              color: "#4FA98A",
               fontFamily: "monospace",
               display: "flex",
             }}
@@ -94,7 +98,7 @@ export default async function OpengraphImage() {
               fontWeight: 800,
               lineHeight: 1.02,
               letterSpacing: "-0.04em",
-              color: "#f1f5f9",
+              color: "#FFFFFF",
               display: "flex",
             }}
           >
@@ -103,7 +107,7 @@ export default async function OpengraphImage() {
           <div
             style={{
               fontSize: "44px",
-              color: "#5eead4",
+              color: "#4FA98A",
               fontFamily: "monospace",
               display: "flex",
             }}
@@ -125,7 +129,7 @@ export default async function OpengraphImage() {
               display: "flex",
               gap: "20px",
               fontSize: "24px",
-              color: "#94a3b8",
+              color: "#9CA3AF",
               fontFamily: "monospace",
             }}
           >
@@ -140,7 +144,7 @@ export default async function OpengraphImage() {
           <div
             style={{
               fontSize: "22px",
-              color: "#64748b",
+              color: "#7B828C",
               fontFamily: "monospace",
               display: "flex",
             }}
